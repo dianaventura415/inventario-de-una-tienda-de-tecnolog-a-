@@ -9,3 +9,4 @@ Integrantes
 |Danilo Enrique Cabrera Rosales|CR20067|
 |Alirio Josue Sibrian Martinez |SM22043|
 |Diana Judith Ventura Erazo  |ve24006|   
+|Ronny Xavier Duran Delgado  |dd23010|
