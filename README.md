@@ -5,6 +5,7 @@ Proyecto base del sistema.
 Integrantes
 
 | Nombre | carnet |
+
 |Vladimir Ernesto Reyes| RZ23001 |.
 
 |Danilo Enrique Cabrera Rosales| CR20067 |.
