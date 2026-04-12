@@ -12,4 +12,5 @@ public class ProductoDTO {
     private String nombre; //nombre del producto
     private String marca; //marca del producto
     private Double precio; //precio del producto
+    private Integer stock; //cantidad disponible en inventario
 }

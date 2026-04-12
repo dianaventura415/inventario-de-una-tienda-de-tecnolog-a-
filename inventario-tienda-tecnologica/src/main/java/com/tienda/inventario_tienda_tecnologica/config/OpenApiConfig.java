@@ -21,11 +21,11 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("tienda de tecnología api") //título de la documentación
+                        .title("Tienda de Tecnología Api") //título de la documentación
                         .version("1.0") //versión de la api
-                        .description("api para gestionar productos tecnológicos") //descripción general
+                        .description("Api para gestionar productos tecnológicos") //descripción general
                         .contact(new Contact()
-                                .name("name") //nombre del autor
+                                .name("Tienda-Tecno") //nombre del autor
                                 .email("name@gmail.com"))); //correo de contacto
     }
 
@@ -48,8 +48,9 @@ public class OpenApiConfig {
             http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                    .anyRequest().permitAll() // <-- agrega esto para permitir todo lo demás
+                    .requestMatchers("/swagger-ui/**", "/v1/api-tienda/**").permitAll()
+                    .requestMatchers("/api/**").permitAll() // permite acceso a los endpoints de la api sin autenticación
+                    .anyRequest().permitAll() // permite acceso a cualquier otra ruta sin autenticación
                 );
             return http.build();
         }

@@ -23,7 +23,8 @@ public class ProductoService {
             producto.getId(), 
             producto.getNombre(), 
             producto.getMarca(), 
-            producto.getPrecio()
+            producto.getPrecio(),
+            producto.getStock()
         );
     }
 
@@ -33,7 +34,7 @@ public class ProductoService {
                 .nombre(dto.getNombre())
                 .precio(dto.getPrecio())
                 .marca(dto.getMarca() != null ? dto.getMarca() : "sin marca") //valor por defecto si no se recibe
-                .stock(0) //valor inicial por defecto
+                .stock(dto.getStock() != null ? dto.getStock() : 0) //valor inicial por defecto
                 .build();
     }
 
