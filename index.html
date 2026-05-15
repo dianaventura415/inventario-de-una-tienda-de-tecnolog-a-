@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario Tecnología </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Inventario Tecnológico</h1>
+            <p style="color: #A7A7A7; text-align: center;">Gestiona tus productos con estilo</p>
+        </header>
+
+        <section class="formulario">
+            <input type="text" id="producto" placeholder="Nombre del dispositivo">
+            <input type="text" id="marca" placeholder="Marca (ej. Apple, Sony)">
+            <input type="number" id="precio" placeholder="Precio ($)">
+            
+            <button onclick="agregarProducto()">
+                Guardar Producto
+            </button>
+        </section>
+
+        <section class="tabla">
+            <h2>Tus Productos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Marca</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaProductos">
+                    </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
