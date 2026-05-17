@@ -8,6 +8,8 @@ function AddProduct({ products, setProducts, showToast }) {
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
 
@@ -18,6 +20,8 @@ function AddProduct({ products, setProducts, showToast }) {
     const newProduct = {
       id: Date.now(),
       name,
+      brand,
+      model,
       price,
       stock
     };
@@ -53,6 +57,22 @@ function AddProduct({ products, setProducts, showToast }) {
         />
 
         <input
+          type="text"
+          placeholder="Marca"
+          value={brand}
+          onChange={(e) =>
+            setBrand(e.target.value)
+          }
+        />
+        <input
+          type="text"
+          placeholder="Modelo"
+          value={model}
+          onChange={(e) =>
+            setModel(e.target.value)
+          }
+        />
+        <input
           type="number"
           placeholder="Precio"
           value={price}
@@ -60,6 +80,8 @@ function AddProduct({ products, setProducts, showToast }) {
             setPrice(e.target.value)
           }
         />
+
+
 
         <input
           type="number"

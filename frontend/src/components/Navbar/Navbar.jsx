@@ -21,7 +21,7 @@ function Navbar( { darkMode, setDarkMode } ) {
       </button>
 
       <h2 className="logo">
-        App Inventario
+        Inventario NawiTech
       </h2>
 
       {/* DESKTOP */}
