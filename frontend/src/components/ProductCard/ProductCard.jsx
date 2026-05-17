@@ -12,6 +12,10 @@ function ProductCard({ product, onDelete }) {
 
       <div className="product-info">
 
+        <div className="category-badge">
+          {product.category}
+        </div>
+
         <h3>{product.name}</h3>   
 
         <p>
