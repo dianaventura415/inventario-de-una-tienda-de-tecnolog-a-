@@ -12,6 +12,9 @@ function Products({ products = [], setProducts, showToast }) {
   const [showModal, setShowModal] =
     useState(false);
 
+  const [searchTerm, setSearchTerm] =
+    useState("");
+
   const [selectedProduct, setSelectedProduct] =
     useState(null);
 
@@ -25,6 +28,27 @@ function Products({ products = [], setProducts, showToast }) {
 
     setShowModal(true);
   };
+
+  const filteredProducts =
+  products.filter((product) => {
+
+    const search =
+      searchTerm.toLowerCase();
+
+    return (
+
+      product.name
+        .toLowerCase()
+        .includes(search)
+
+      ||
+
+      product.id
+        .toString()
+        .includes(search)
+
+    );
+  });
 
   // Confirmacion de delete
   const confirmDelete = () => {
@@ -76,18 +100,25 @@ function Products({ products = [], setProducts, showToast }) {
   };
   //-----------------------------------------
 
-
   return (
     <div className="products-page">
 
       <div className="products-header">
         <h1>Productos</h1>
       </div>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Buscar productos..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
 
       {/* GRID */}
       <div className="products-grid">
 
-        {products.map((product) => (
+        {filteredProducts.map((product) => (
 
           <ProductCard
             key={product.id}
