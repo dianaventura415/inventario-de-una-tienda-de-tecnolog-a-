@@ -3,6 +3,8 @@ import "./AddProduct.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import categories from "../../data/categories";
+
 function AddProduct({ products, setProducts, showToast }) {
 
   const navigate = useNavigate();
@@ -12,6 +14,7 @@ function AddProduct({ products, setProducts, showToast }) {
   const [model, setModel] = useState("");
   const [price, setPrice] = useState("");
   const [stock, setStock] = useState("");
+  const [category, setCategory] = useState("");
 
   const handleSubmit = (e) => {
 
@@ -23,7 +26,8 @@ function AddProduct({ products, setProducts, showToast }) {
       brand,
       model,
       price,
-      stock
+      stock,
+      category
     };
 
     setProducts([...products, newProduct]);
@@ -91,6 +95,14 @@ function AddProduct({ products, setProducts, showToast }) {
             setStock(e.target.value)
           }
         />
+        <select value={category} onChange={(e) => setCategory(e.target.value)}        >
+          <option value="">
+            Selecciona categoría
+          </option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}> {cat} </option>
+          ))}
+        </select>
 
         <button type="submit">
           Guardar Producto

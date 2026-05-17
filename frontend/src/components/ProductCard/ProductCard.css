@@ -85,3 +85,15 @@
 .delete-btn:active {
   transform: scale(0.95);
 }
+
+.category-badge {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-surface);
+  padding: 6px 12px;
+  max-width: fit-content;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}

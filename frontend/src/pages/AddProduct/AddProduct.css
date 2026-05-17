@@ -9,7 +9,7 @@
   gap: 15px;
 }
 
-.product-form input {
+.product-form input, select {
   padding: 14px;
   border: 1px solid var(--color-border);
   border-radius: 10px;

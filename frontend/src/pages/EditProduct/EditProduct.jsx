@@ -3,6 +3,8 @@ import "./EditProduct.css";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import categories from "../../data/categories";
+
 function EditProduct({ products, setProducts, showToast }) {
 
   const { id } = useParams();
@@ -16,6 +18,7 @@ function EditProduct({ products, setProducts, showToast }) {
   const [model, setModel] = useState(product.model);
   const [price, setPrice] = useState(product.price);
   const [stock, setStock] = useState(product.stock);
+  const [category, setCategory] = useState(product.category);
 
   // Si el producto no existe, mostrar un mensaje
   if (!product) {
@@ -41,7 +44,8 @@ function EditProduct({ products, setProducts, showToast }) {
             brand,
             model,
             price,
-            stock
+            stock,
+            category
           };
 
         }
@@ -110,6 +114,15 @@ function EditProduct({ products, setProducts, showToast }) {
             setStock(e.target.value)
           }
         />
+        
+        <select value={category} onChange={(e) => setCategory(e.target.value)}        >
+          <option value="">
+            Selecciona categoría
+          </option>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}> {cat} </option>
+          ))}
+        </select>
 
         <button type="submit">
           Guardar Cambios
