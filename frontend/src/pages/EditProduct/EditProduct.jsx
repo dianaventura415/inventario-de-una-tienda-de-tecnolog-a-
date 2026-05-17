@@ -12,6 +12,8 @@ function EditProduct({ products, setProducts, showToast }) {
   const product = products.find((p) => p.id === Number(id));
   // Estados locales para el formulario
   const [name, setName] = useState(product.name);
+  const [brand, setBrand] = useState(product.brand);
+  const [model, setModel] = useState(product.model);
   const [price, setPrice] = useState(product.price);
   const [stock, setStock] = useState(product.stock);
 
@@ -36,6 +38,8 @@ function EditProduct({ products, setProducts, showToast }) {
           return {
             ...p,
             name,
+            brand,
+            model,
             price,
             stock
           };
@@ -71,6 +75,23 @@ function EditProduct({ products, setProducts, showToast }) {
           value={name}
           onChange={(e) =>
             setName(e.target.value)
+          }
+        />
+
+        <input
+          type="text"
+          placeholder="Marca"
+          value={brand}
+          onChange={(e) =>
+            setBrand(e.target.value)
+          }
+        />
+        <input
+          type="text"
+          placeholder="Modelo"
+          value={model}
+          onChange={(e) =>
+            setModel(e.target.value)
           }
         />
 

@@ -12,7 +12,16 @@ function ProductCard({ product, onDelete }) {
 
       <div className="product-info">
 
-        <h3>{product.name}</h3>
+        <h3>{product.name}</h3>   
+
+        <p>
+          Marca: {product.brand}
+        </p>
+
+
+        <p>
+          Modelo: {product.model}
+        </p>
 
         <p>
           Precio: ${product.price}

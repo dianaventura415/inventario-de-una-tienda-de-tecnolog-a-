@@ -19,7 +19,7 @@ function Home() {
     <div className="home">
 
       <div className="home-header">
-        <h1>App Inventario</h1>
+        <h1>Inventario NawiTech</h1>
       </div>
 
       <div className="dashboard-grid">
