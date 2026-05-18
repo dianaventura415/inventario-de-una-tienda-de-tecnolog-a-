@@ -13,10 +13,7 @@ function Navbar( { darkMode, setDarkMode } ) {
     <header className="navbar">
 
       {/* MOBILE */}
-      <button
-        className="menu-button"
-        onClick={toggleSidebar}
-      >
+      <button className="menu-button" onClick={toggleSidebar}>
         <FaBars />
       </button>
 
@@ -41,12 +38,7 @@ function Navbar( { darkMode, setDarkMode } ) {
           Reportes
         </Link>
 
-        <button
-          className="theme-toggle"
-          onClick={() =>
-            setDarkMode(!darkMode)
-          }
-        >
+        <button className="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
           {darkMode
             ? <FaSun />
             : <FaMoon />

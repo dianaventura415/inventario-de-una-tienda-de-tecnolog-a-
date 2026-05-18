@@ -1,7 +1,7 @@
 const products = [
   {
     id: 1,
-    name: "Laptop HP",
+    name: "Laptop",
     brand: "HP",
     model: "Pavilion",
     category: "Laptops",
@@ -10,7 +10,7 @@ const products = [
   },
   {
     id: 2,
-    name: "Mouse Logitech",
+    name: "Mouse",
     brand: "Logitech",
     model: "MX Master",
     category: "Periféricos",
@@ -19,12 +19,39 @@ const products = [
   },
   {
     id: 3,
-    name: "Mouse KlipExtreme",
+    name: "Mouse",
     brand: "KlipExtreme",
     model: "KE-100",
     category: "Periféricos",
     price: 20,
     stock: 25
+  },
+  {
+    id: 4,
+    name: "Teclado",
+    brand: "Corsair",
+    model: "K95",
+    category: "Periféricos",
+    price: 150,
+    stock: 20
+  },
+  {
+    id: 5,
+    name: "Monitor",
+    brand: "Samsung",
+    model: "Curvo 27\"",
+    category: "Monitores",
+    price: 300,
+    stock: 15
+  },
+  {
+    id: 6,
+    name: "Audifonos",
+    brand: "Sony",
+    model: "WH-1000XM4",
+    category: "Audio",
+    price: 350,
+    stock: 12
   }
 ];
 
