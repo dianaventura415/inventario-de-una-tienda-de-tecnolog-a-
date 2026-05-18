@@ -4,7 +4,7 @@ const products = [
     name: "Laptop HP",
     brand: "HP",
     model: "Pavilion",
-    category: "Laptop",
+    category: "Laptops",
     price: 850,
     stock: 10
   },
