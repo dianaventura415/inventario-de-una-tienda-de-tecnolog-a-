@@ -38,23 +38,13 @@ function ProductCard({ product, onDelete }) {
       </div>
 
       <div className="card-actions">
-
-        <button
-          className="edit-btn"
-          onClick={() =>
-            navigate(`/editar/${product.id}`)
-          }
-        >
+        <button className="edit-btn" onClick={() => navigate(`/editar/${product.id}`)}>
           <FaEdit />
         </button>
 
-        <button
-          className="delete-btn"
-          onClick={() => onDelete(product.id)}
-        >
+        <button className="delete-btn" onClick={() => onDelete(product.id)}>
           <FaTrash />
         </button>
-
       </div>
 
     </div>

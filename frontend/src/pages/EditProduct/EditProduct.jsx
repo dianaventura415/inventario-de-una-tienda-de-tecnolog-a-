@@ -10,8 +10,10 @@ function EditProduct({ products, setProducts, showToast }) {
   const { id } = useParams();
 
   const navigate = useNavigate();
+
   // Buscar el producto por ID
   const product = products.find((p) => p.id === Number(id));
+
   // Estados locales para el formulario
   const [name, setName] = useState(product.name);
   const [brand, setBrand] = useState(product.brand);
@@ -35,9 +37,7 @@ function EditProduct({ products, setProducts, showToast }) {
 
     const updatedProducts =
       products.map((p) => {
-
         if (p.id === product.id) {
-
           return {
             ...p,
             name,
@@ -47,12 +47,9 @@ function EditProduct({ products, setProducts, showToast }) {
             stock,
             category
           };
-
         }
-
         return p;
       });
-
     setProducts(updatedProducts);
 
     // Mostrar mensaje de producto actualizado
@@ -115,7 +112,7 @@ function EditProduct({ products, setProducts, showToast }) {
           }
         />
         
-        <select value={category} onChange={(e) => setCategory(e.target.value)}        >
+        <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">
             Selecciona categoría
           </option>

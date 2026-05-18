@@ -9,6 +9,7 @@ function AddProduct({ products, setProducts, showToast }) {
 
   const navigate = useNavigate();
 
+  // Estados locales para el formulario
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");

@@ -10,49 +10,39 @@ import categories from "../../data/categories";
 function Products({ products = [], setProducts, showToast }) {
 
   // Creacion de estados modal
-  const [showModal, setShowModal] =
-    useState(false);
-
-  const [searchTerm, setSearchTerm] =
-    useState("");
-
-  const [selectedCategory, setSelectedCategory] =
-    useState("");
-
-  const [selectedProduct, setSelectedProduct] =
-    useState(null);
+  const [showModal, setShowModal] = useState(false);
+  // Estados para busqueda y filtro
+  const [searchTerm, setSearchTerm] = useState("");
+  // Estado para filtro de categoria
+  const [selectedCategory, setSelectedCategory] = useState("");
+  // Estado para producto seleccionado en el modal
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   //Referencia timer
   const deleteTimer = useRef(null);
 
   // Eliminar productos (Abre Modal)
   const handleDelete = (product) => {
-
     setSelectedProduct(product);
-
     setShowModal(true);
   };
 
-  const filteredProducts =
-  products.filter((product) => {
+  const filteredProducts = products.filter((product) => {
 
-    const search =
-      searchTerm.toLowerCase();
-// filtro de busqueda por nombre y ID
+    const search = searchTerm.toLowerCase();
+
+    // filtro de busqueda por nombre y ID del producto
     const matchesSearch =
-
       product.name
         .toLowerCase()
         .includes(search)
-
       ||
-
       product.id
         .toString()
         .includes(search)
-    // filtro por categoria
+
+    // filtro por categoria 
     const matchesCategory =
-      
       selectedCategory === ""
       ||
       product.category === selectedCategory;
@@ -60,7 +50,6 @@ function Products({ products = [], setProducts, showToast }) {
     return (
       matchesSearch &&
       matchesCategory
-
     );
   });
 
@@ -132,11 +121,7 @@ function Products({ products = [], setProducts, showToast }) {
       <div className="filter-container">
         <select
           value={selectedCategory}
-          onChange={(e) =>
-            setSelectedCategory(
-              e.target.value
-            )
-          }
+          onChange={(e) => setSelectedCategory(e.target.value)}
         >
           <option value="">
             Todas las categorías
@@ -154,21 +139,16 @@ function Products({ products = [], setProducts, showToast }) {
 
       {/* GRID */}
       <div className="products-grid">
-
         {filteredProducts.map((product) => (
-
           <ProductCard
             key={product.id}
             product={product}
             onDelete={() => handleDelete(product)}
           />
-
         ))}
-
       </div>
       
-      {/* MODAL */}
-
+      {/* MODAL */} 
       <ConfirmModal
         visible={showModal}
         title="Eliminar producto"
