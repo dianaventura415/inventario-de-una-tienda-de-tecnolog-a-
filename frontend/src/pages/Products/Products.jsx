@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import initialProducts from "../../data/products";
+import categories from "../../data/categories";
 
 function Products({ products = [], setProducts, showToast }) {
 
@@ -13,6 +14,9 @@ function Products({ products = [], setProducts, showToast }) {
     useState(false);
 
   const [searchTerm, setSearchTerm] =
+    useState("");
+
+  const [selectedCategory, setSelectedCategory] =
     useState("");
 
   const [selectedProduct, setSelectedProduct] =
@@ -34,8 +38,8 @@ function Products({ products = [], setProducts, showToast }) {
 
     const search =
       searchTerm.toLowerCase();
-
-    return (
+// filtro de busqueda por nombre y ID
+    const matchesSearch =
 
       product.name
         .toLowerCase()
@@ -46,6 +50,16 @@ function Products({ products = [], setProducts, showToast }) {
       product.id
         .toString()
         .includes(search)
+    // filtro por categoria
+    const matchesCategory =
+      
+      selectedCategory === ""
+      ||
+      product.category === selectedCategory;
+
+    return (
+      matchesSearch &&
+      matchesCategory
 
     );
   });
@@ -113,6 +127,29 @@ function Products({ products = [], setProducts, showToast }) {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+      </div>
+
+      <div className="filter-container">
+        <select
+          value={selectedCategory}
+          onChange={(e) =>
+            setSelectedCategory(
+              e.target.value
+            )
+          }
+        >
+          <option value="">
+            Todas las categorías
+          </option>
+          {categories.map((category) => (
+            <option
+              key={category}
+              value={category}
+            >
+              {category}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* GRID */}
