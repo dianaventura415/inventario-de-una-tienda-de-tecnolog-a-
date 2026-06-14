@@ -1,6 +1,11 @@
 import "./Home.css";
 
-import { FaBox, FaPlusCircle, FaChartBar, FaCog } from "react-icons/fa";
+import { 
+  FaBox, 
+  FaPlusCircle, 
+  FaChartBar, 
+  FaCog } from "react-icons/fa";
+  
 import { useNavigate } from "react-router-dom";
 
 import DashboardCard from "../../components/DashboardCard/DashboardCard";

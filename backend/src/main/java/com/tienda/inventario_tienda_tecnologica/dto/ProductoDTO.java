@@ -11,6 +11,8 @@ public class ProductoDTO {
     private Long id; //identificador único del producto
     private String nombre; //nombre del producto
     private String marca; //marca del producto
+    private String modelo; //modelo del producto
     private Double precio; //precio del producto
     private Integer stock; //cantidad disponible en inventario
+    private String categoria; //categoría del producto (opcional)
 }

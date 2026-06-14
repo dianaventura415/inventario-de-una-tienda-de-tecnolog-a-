@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  inventario-tienda-tecnologica:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: inventario-tienda-tecnologica
+    image: inventario-tienda-tecnologica:1.0
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/tienda_prueba
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 12345
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - inventario-network
+
+  inventario-tienda-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: inventario-tienda-frontend
+    image: inventario-tienda-frontend:1.0
+    ports:
+      - "5173:80"
+    depends_on:
+      - inventario-tienda-tecnologica
+    networks:
+      - inventario-network
+
+networks:
+  inventario-network:
+    driver: bridge
+
+#docker compose up --build -d
