@@ -4,6 +4,7 @@ import com.tienda.inventario_tienda_tecnologica.dto.ProductoDTO;
 import com.tienda.inventario_tienda_tecnologica.model.Producto;
 import com.tienda.inventario_tienda_tecnologica.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
+import com.tienda.inventario_tienda_tecnologica.dto.DashboardDTO;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,5 +85,22 @@ public class ProductoService {
             throw new RuntimeException("producto no encontrado");
         }
         productoRepository.deleteById(id);
+    }
+    
+    public DashboardDTO obtenerDashboard() {
+        Long totalProductos =
+            productoRepository.count();
+
+        Long stockTotal =
+            productoRepository.obtenerStockTotal();
+
+        Double valorInventario =
+            productoRepository.obtenerValorInventario();
+
+        return new DashboardDTO(
+            totalProductos,
+            stockTotal,
+            valorInventario
+        );
     }
 }

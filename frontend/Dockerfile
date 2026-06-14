@@ -21,5 +21,5 @@ EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
 
-#docker build -t inventario-tienda-frontend:1.0 .
-#docker run -d --name inventario-tienda-frontend -p 5173:80 inventario-tienda-frontend:1.0
+#docker build -t inventario-frontend:1.0 .
+#docker run -d --name inventario-frontend -p 5173:80 inventario-frontend:1.0

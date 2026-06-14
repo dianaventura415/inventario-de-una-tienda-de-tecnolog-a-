@@ -15,9 +15,9 @@ WORKDIR /app
 
 EXPOSE 8080
 
-COPY --from=builder /app/target/inventario-tienda-tecnologica-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/inventario-backend-0.0.1-SNAPSHOT.jar app.jar
 
 ENTRYPOINT ["java","-jar","app.jar"]
 
-#docker build -t inventario-tienda-tecnologica:1.0 .
-#docker run -d --name inventario-tienda-tecnologica -p 8080:8080 -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/tienda_db1 -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=Danilo123 inventario-tienda-tecnologica:1.0
+#docker build -t inventario-backend:1.0 .
+#docker run -d --name inventario-backend -p 8080:8080 -e SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/tienda_db1 -e SPRING_DATASOURCE_USERNAME=postgres -e SPRING_DATASOURCE_PASSWORD=Danilo123 inventario-backend:1.0
