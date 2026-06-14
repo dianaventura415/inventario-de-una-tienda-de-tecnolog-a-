@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:5173") // Permite solicitudes desde el frontend en Vite
 @RestController //controlador rest que expone endpoints http
 @RequestMapping("/api/productos") //ruta base para todos los métodos de producto
 public class ProductoController {

@@ -1,13 +1,37 @@
 import "./Products.css";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import ProductCard from "../../components/ProductCard/ProductCard";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
-import initialProducts from "../../data/products";
 import categories from "../../data/categories";
 
-function Products({ products = [], setProducts, showToast }) {
+import api from "../../api/api"; // Importa tu instancia de Axios configurada
+
+function Products({ setProducts, showToast }) {
+
+  // Estado para almacenar los productos
+  const [products, setProductsState] = useState([]);
+
+  // Cargar productos desde el backend al montar el componente
+  useEffect(() => {
+    api.get("/productos")
+      .then((response) => {
+        console.log("Productos cargados:", response.data);
+        setProductsState(response.data);
+        setProducts(response.data); // Sincroniza con el estado global
+      })
+      // Manejo de errores
+      .catch((error) => {
+        console.error("Error al cargar productos:", error);
+        showToast({
+          message: "Error al cargar productos",
+          type: "error"
+        });
+      });
+  }, []);
+
+
 
   // Creacion de estados modal
   const [showModal, setShowModal] = useState(false);
@@ -28,79 +52,69 @@ function Products({ products = [], setProducts, showToast }) {
   };
 
   const filteredProducts = products.filter((product) => {
-
     const search = searchTerm.toLowerCase();
 
-    // filtro de busqueda por nombre y ID del producto
+    // filtro de búsqueda por nombre y ID del producto
     const matchesSearch =
-      product.name
-        .toLowerCase()
-        .includes(search)
-      ||
-      product.id
-        .toString()
-        .includes(search)
+      product.nombre.toLowerCase().includes(search) ||
+      product.id.toString().includes(search);
 
-    // filtro por categoria 
+    // filtro por categoría (si tu backend devuelve "categoria")
     const matchesCategory =
-      selectedCategory === ""
-      ||
-      product.category === selectedCategory;
+      selectedCategory === "" ||
+      product.categoria === selectedCategory;
 
-    return (
-      matchesSearch &&
-      matchesCategory
-    );
+    return matchesSearch && matchesCategory;
   });
 
-  // Confirmacion de delete
-  const confirmDelete = () => {
 
+  // Confirmacion de delete
+  const confirmDelete = async () => {
     const deletedProduct = selectedProduct;
 
-    const updatedProducts = products.filter((p) => p.id !== deletedProduct.id);
+    // Eliminar producto del backend
+    try {
+      await api.delete(`/productos/${deletedProduct.id}`);
+      // Eliminar producto del estado local
+      const updatedProducts = products.filter((p) => p.id !== deletedProduct.id);
+      setProductsState(updatedProducts);
+      setProducts(updatedProducts);
 
-    setProducts(updatedProducts);
+      setShowModal(false);
+      // Mostrar Toast con opción de deshacer
+      showToast({
+        message: "Producto eliminado",
+        type: "error",
+        actionText: "DESHACER",
+        onAction: async () => {
+          // Restaurar producto en backend
+          await api.post("/productos", deletedProduct);
+          setProductsState((prev) => [...prev, deletedProduct]);
+          setProducts((prev) => [...prev, deletedProduct]);
 
-    setShowModal(false);
-
-    // TIMER
-    deleteTimer.current = setTimeout(() => {
-      console.log(
-        "Eliminación definitiva"
-      );
-
-    }, 5000);
-
-    // TOAST
-    showToast({
-      message: "Producto eliminado",
-      type: "error",
-      actionText: "DESHACER",
-
-      onAction: () => {
-        clearTimeout(deleteTimer.current);
-
-        setProducts((prev) => [
-          ...prev,
-          deletedProduct
-        ]);
-
-        showToast({
-          message: "Producto restaurado",
-          type: "success"
-        });
-      }
-    });
+          showToast({
+            message: "Producto restaurado",
+            type: "success"
+          });
+        }
+      });
+    } catch (error) {
+      console.error("Error eliminando producto:", error);
+      showToast({
+        message: "Error al eliminar producto",
+        type: "error"
+      });
+    }
   };
+
 
 
   // Temporal para restaurar los datos
   //-----------------------------------------
-  const resetProducts = () => {
-    localStorage.removeItem("products");
-    setProducts(initialProducts);
-  };
+  //const resetProducts = () => {
+  //  localStorage.removeItem("products");
+  //  setProducts(initialProducts);
+  //};
   //-----------------------------------------
 
   return (
@@ -152,17 +166,17 @@ function Products({ products = [], setProducts, showToast }) {
       <ConfirmModal
         visible={showModal}
         title="Eliminar producto"
-        message={`¿Seguro que deseas eliminar "${selectedProduct?.name}"?`}
+        message={`¿Seguro que deseas eliminar "${selectedProduct?.nombre}"?`}
         onConfirm={confirmDelete}
         onCancel={() => setShowModal(false)}
       />
 
-      {/* ---------temporal---------- */}
+      {/* ---------temporal---------- 
       <br /><br />
       <button onClick={resetProducts}>
         Restaurar Datos
       </button>
-      {/* --------------------------- */}
+       --------------------------- */}
 
     </div>
   );

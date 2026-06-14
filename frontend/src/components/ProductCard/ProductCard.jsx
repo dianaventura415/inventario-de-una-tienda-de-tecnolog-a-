@@ -13,22 +13,22 @@ function ProductCard({ product, onDelete }) {
       <div className="product-info">
 
         <div className="category-badge">
-          {product.category}
+          {product.categoria}
         </div>
 
-        <h3>{product.name}</h3>   
+        <h3>{product.nombre}</h3>   
 
         <p>
-          Marca: {product.brand}
+          Marca: {product.marca}
         </p>
 
 
         <p>
-          Modelo: {product.model}
+          Modelo: {product.modelo}
         </p>
 
         <p>
-          Precio: ${product.price}
+          Precio: ${product.precio}
         </p>
 
         <p>

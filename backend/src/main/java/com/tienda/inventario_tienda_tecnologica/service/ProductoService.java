@@ -22,9 +22,11 @@ public class ProductoService {
         return new ProductoDTO(
             producto.getId(), 
             producto.getNombre(), 
-            producto.getMarca(), 
+            producto.getMarca(),
+            producto.getModelo(),
             producto.getPrecio(),
-            producto.getStock()
+            producto.getStock(),
+            producto.getCategoria()
         );
     }
 
@@ -33,8 +35,10 @@ public class ProductoService {
         return Producto.builder()
                 .nombre(dto.getNombre())
                 .precio(dto.getPrecio())
+                .modelo(dto.getModelo())
                 .marca(dto.getMarca() != null ? dto.getMarca() : "sin marca") //valor por defecto si no se recibe
                 .stock(dto.getStock() != null ? dto.getStock() : 0) //valor inicial por defecto
+                .categoria(dto.getCategoria() != null ? dto.getCategoria() : "sin categoría") //valor por defecto si no se recibe
                 .build();
     }
 
@@ -62,7 +66,11 @@ public class ProductoService {
         //actualiza los campos con los valores recibidos
         producto.setNombre(dto.getNombre());
         producto.setMarca(dto.getMarca());
+        producto.setModelo(dto.getModelo());
         producto.setPrecio(dto.getPrecio());
+        producto.setStock(dto.getStock());
+        producto.setCategoria(dto.getCategoria());
+
 
         //guarda los cambios en la base de datos
         Producto actualizado = productoRepository.save(producto);

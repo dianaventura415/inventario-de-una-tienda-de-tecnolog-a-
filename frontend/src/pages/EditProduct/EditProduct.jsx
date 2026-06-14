@@ -3,6 +3,8 @@ import "./EditProduct.css";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import api from "../../api/api"; // Importa tu instancia de Axios configurada
+
 import categories from "../../data/categories";
 
 function EditProduct({ products, setProducts, showToast }) {
@@ -15,12 +17,12 @@ function EditProduct({ products, setProducts, showToast }) {
   const product = products.find((p) => p.id === Number(id));
 
   // Estados locales para el formulario
-  const [name, setName] = useState(product.name);
-  const [brand, setBrand] = useState(product.brand);
-  const [model, setModel] = useState(product.model);
-  const [price, setPrice] = useState(product.price);
+  const [name, setName] = useState(product.nombre);
+  const [brand, setBrand] = useState(product.marca);
+  const [model, setModel] = useState(product.modelo);
+  const [price, setPrice] = useState(product.precio);
   const [stock, setStock] = useState(product.stock);
-  const [category, setCategory] = useState(product.category);
+  const [category, setCategory] = useState(product.categoria);
 
   // Si el producto no existe, mostrar un mensaje
   if (!product) {
@@ -31,34 +33,42 @@ function EditProduct({ products, setProducts, showToast }) {
     );
   }
   // Manejar el envio del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault();
 
-    const updatedProducts =
-      products.map((p) => {
-        if (p.id === product.id) {
-          return {
-            ...p,
-            name,
-            brand,
-            model,
-            price,
-            stock,
-            category
-          };
-        }
-        return p;
+    const updatedProduct = {
+      nombre: name,
+      marca: brand,
+      modelo: model,
+      precio: parseFloat(price),
+      stock: parseInt(stock),
+      categoria: category
+    };
+
+    try {
+      // Actualizar en backend
+      const response = await api.put(`/productos/${product.id}`, updatedProduct);
+
+      // Actualizar en estado global
+      const updatedProducts = products.map((p) =>
+        p.id === product.id ? response.data : p
+      );
+      setProducts(updatedProducts);
+
+      showToast({
+        message: "Producto actualizado",
+        type: "success",
       });
-    setProducts(updatedProducts);
 
-    // Mostrar mensaje de producto actualizado
-    showToast({
-      message: "Producto actualizado",
-      type: "success"
-    });
-
-    navigate("/productos");
+      navigate("/productos");
+    } catch (error) {
+      console.error("Error al actualizar producto:", error);
+      showToast({
+        message: "Error al actualizar producto",
+        type: "error",
+      });
+    }
   };
 
   return (
@@ -74,8 +84,7 @@ function EditProduct({ products, setProducts, showToast }) {
         <input
           type="text"
           value={name}
-          onChange={(e) =>
-            setName(e.target.value)
+          onChange={(e) => setName(e.target.value)
           }
         />
 
@@ -83,32 +92,28 @@ function EditProduct({ products, setProducts, showToast }) {
           type="text"
           placeholder="Marca"
           value={brand}
-          onChange={(e) =>
-            setBrand(e.target.value)
+          onChange={(e) => setBrand(e.target.value)
           }
         />
         <input
           type="text"
           placeholder="Modelo"
           value={model}
-          onChange={(e) =>
-            setModel(e.target.value)
+          onChange={(e) => setModel(e.target.value)
           }
         />
 
         <input
           type="number"
           value={price}
-          onChange={(e) =>
-            setPrice(e.target.value)
+          onChange={(e) => setPrice(e.target.value)
           }
         />
 
         <input
           type="number"
           value={stock}
-          onChange={(e) =>
-            setStock(e.target.value)
+          onChange={(e) => setStock(e.target.value)
           }
         />
         

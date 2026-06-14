@@ -24,9 +24,15 @@ public class Producto {
     private String marca;
 
     @Column(nullable = false)
+    private String modelo;
+
+    @Column(nullable = false)
     private Double precio;
 
     @Column(nullable = false)
     private Integer stock;
+
+    @Column(nullable = false)
+    private String categoria;
 
 }
