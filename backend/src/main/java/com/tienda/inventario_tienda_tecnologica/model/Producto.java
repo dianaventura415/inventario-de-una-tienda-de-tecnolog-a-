@@ -20,19 +20,15 @@ public class Producto {
     @Column(nullable = false)
     private String nombre;
 
-    @Column(nullable = false)
     private String marca;
 
-    @Column(nullable = false)
     private String modelo;
 
     @Column(nullable = false)
     private Double precio;
 
-    @Column(nullable = false)
     private Integer stock;
 
-    @Column(nullable = false)
     private String categoria;
 
 }

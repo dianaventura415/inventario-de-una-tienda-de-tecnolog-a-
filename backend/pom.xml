@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.tienda</groupId>
-    <artifactId>inventario-tienda-tecnologica</artifactId>
+    <artifactId>inventario-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>inventario-tienda</name>
+    <name>inventario-backend</name>
     <description>Proyecto de inventario tecnológico</description>
 
     <properties>

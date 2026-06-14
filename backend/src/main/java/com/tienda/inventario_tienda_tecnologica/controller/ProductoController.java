@@ -3,6 +3,7 @@ package com.tienda.inventario_tienda_tecnologica.controller;
 import com.tienda.inventario_tienda_tecnologica.dto.ProductoDTO;
 import com.tienda.inventario_tienda_tecnologica.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
+import com.tienda.inventario_tienda_tecnologica.dto.DashboardDTO;
 
 import java.util.List;
 
@@ -37,5 +38,11 @@ public class ProductoController {
     public void eliminar(@PathVariable Long id) {
         //se pasa el id del producto en la url y se elimina de la base de datos
         productoService.eliminarProducto(id);
+    }
+    
+    @GetMapping("/dashboard")
+    public DashboardDTO dashboard() {
+
+        return productoService.obtenerDashboard();
     }
 }
