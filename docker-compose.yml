@@ -14,8 +14,12 @@ services:
       - db_data:/var/lib/postgresql/data
     networks:
       - inventario-network
-
-
+    # ¡AGREGADO!: Docker verificará internamente cuándo PostgreSQL ya acepta conexiones
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   inventario-backend:
     build:
@@ -26,11 +30,14 @@ services:
     ports:
       - "${BACKEND_PORT}:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/${POSTGRES_DB}
+      # CORREGIDO: Cambiado 'host.docker.internal' por 'database' (el nombre del servicio de arriba)
+      SPRING_DATASOURCE_URL: jdbc:postgresql://database:5432/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    # CORREGIDO: Ahora espera de forma estricta que la base de datos esté sana (healthy)
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     networks:
       - inventario-network
 
@@ -53,5 +60,3 @@ networks:
 
 volumes:
   db_data:
-
-#docker compose up --build -d
