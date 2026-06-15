@@ -1,6 +1,10 @@
 package com.tienda.inventario_tienda_tecnologica.repository;
 
+import com.tienda.inventario_tienda_tecnologica.dto.CategoriaReporteDTO;
 import com.tienda.inventario_tienda_tecnologica.model.Producto;
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +22,23 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
     FROM Producto p
     """)
     Double obtenerValorInventario();
+
+    @Query("""
+    SELECT p
+    FROM Producto p
+    WHERE p.stock <= 5
+    ORDER BY p.stock ASC
+    """)
+    List<Producto> obtenerProductosBajoStock();
+
+    @Query("""
+    SELECT new com.tienda.inventario_tienda_tecnologica.dto.CategoriaReporteDTO(
+        p.categoria,
+        COUNT(p)
+    )
+    FROM Producto p
+    GROUP BY p.categoria
+    ORDER BY COUNT(p) DESC
+    """)
+    List<CategoriaReporteDTO> obtenerProductosPorCategoria();
 }

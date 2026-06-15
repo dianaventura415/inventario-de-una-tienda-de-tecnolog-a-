@@ -4,6 +4,8 @@ import com.tienda.inventario_tienda_tecnologica.dto.ProductoDTO;
 import com.tienda.inventario_tienda_tecnologica.model.Producto;
 import com.tienda.inventario_tienda_tecnologica.repository.ProductoRepository;
 import org.springframework.stereotype.Service;
+
+import com.tienda.inventario_tienda_tecnologica.dto.CategoriaReporteDTO;
 import com.tienda.inventario_tienda_tecnologica.dto.DashboardDTO;
 
 import java.util.List;
@@ -102,5 +104,20 @@ public class ProductoService {
             stockTotal,
             valorInventario
         );
+    }
+
+    public List<ProductoDTO> obtenerProductosBajoStock() {
+        return productoRepository
+                .obtenerProductosBajoStock()
+                .stream()
+                .map(this::toDTO)
+                .toList();
+    }
+
+    public List<CategoriaReporteDTO>
+    obtenerProductosPorCategoria() {
+
+        return productoRepository
+                .obtenerProductosPorCategoria();
     }
 }

@@ -3,6 +3,8 @@ package com.tienda.inventario_tienda_tecnologica.controller;
 import com.tienda.inventario_tienda_tecnologica.dto.ProductoDTO;
 import com.tienda.inventario_tienda_tecnologica.service.ProductoService;
 import org.springframework.web.bind.annotation.*;
+
+import com.tienda.inventario_tienda_tecnologica.dto.CategoriaReporteDTO;
 import com.tienda.inventario_tienda_tecnologica.dto.DashboardDTO;
 
 import java.util.List;
@@ -44,5 +46,20 @@ public class ProductoController {
     public DashboardDTO dashboard() {
 
         return productoService.obtenerDashboard();
+    }
+
+    @GetMapping("/bajo-stock")
+    public List<ProductoDTO> bajoStock() {
+
+        return productoService
+                .obtenerProductosBajoStock();
+    }
+
+    @GetMapping("/reporte-categorias")
+    public List<CategoriaReporteDTO>
+    reporteCategorias() {
+
+        return productoService
+                .obtenerProductosPorCategoria();
     }
 }
