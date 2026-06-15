@@ -9,6 +9,7 @@ import AddProduct from "./pages/AddProduct/AddProduct";
 import initialProducts from "./data/products";
 import EditProduct from "./pages/EditProduct/EditProduct";
 import Toast from "./components/Toast/Toast";
+import Reports from "./pages/Reports/Reports";
 
 function App() {
   const [products, setProducts] = useState(() => {
@@ -97,6 +98,7 @@ function App() {
           <Route path="/productos" element={<Products products={products} setProducts={setProducts} showToast={showToast}/>} />
           <Route path="/agregar" element={<AddProduct products={products} setProducts={setProducts} showToast={showToast}/>} />
           <Route path="/editar/:id" element={<EditProduct products={products} setProducts={setProducts} showToast={showToast}/>} />
+          <Route path="/reportes" element={<Reports />} />
         </Routes>
 
       </MainLayout>
